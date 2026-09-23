@@ -20,12 +20,14 @@ func _run() -> void:
 	var run: Run = _world.run
 	var player: Player = _world.player
 	_check(run.phase == Run.Phase.FARMING and run.wave == 1, "starts farming wave 1")
-	_check(_enemies().size() >= 20, "farm zones spawned monsters (%d)" % _enemies().size())
+	_check(_enemies().size() >= 8, "farm zones spawned monsters (%d)" % _enemies().size())
 	_check(_world.quests.quests.size() == QuestLog.ACTIVE, "three quests active")
 
 	# teleport: interrupted by damage, completes when left alone
-	# a quiet spot, away from the farm zones, so no monster breaks the cast
-	player.global_position = Vector2(60, 200)
+	# the island is too small for a quiet spot, so clear the farm monsters before casting
+	for enemy in _enemies():
+		enemy.queue_free()
+	player.global_position = Vector2(96, 56)
 	player._teleport = 0.0
 	player.take_damage(1.0)
 	_check(not player.is_teleporting(), "damage interrupts the teleport")
@@ -33,13 +35,13 @@ func _run() -> void:
 	await _seconds(Player.TELEPORT_TIME + 0.2)
 	_check(player.global_position.distance_to(_world.athena.arrival_point()) < 2.0, "teleport lands at Athena")
 
-	# invasion: invaders spawn at the edge and walk towards Athena
+	# invasion: invaders spawn at the island's rim and walk towards Athena
 	run.call_invasion()
 	await _seconds(1.0)
 	var invaders := _enemies().filter(func(e: Enemy) -> bool: return e.is_invader())
 	_check(invaders.size() > 0, "invasion spawned invaders")
-	var start_distance: float = invaders[0].global_position.distance_to(_world.athena.global_position)
-	_check(start_distance > 250.0, "invaders enter far from Athena (%d px)" % start_distance)
+	var start_distance: float = invaders[0].home.distance_to(_world.athena.global_position)
+	_check(start_distance > 20.0, "invaders enter away from Athena (%d px)" % start_distance)
 	await _seconds(2.0)
 	if is_instance_valid(invaders[0]):
 		_check(invaders[0].global_position.distance_to(_world.athena.global_position) < start_distance, "invaders march on Athena")
@@ -89,7 +91,7 @@ func _run() -> void:
 	# behaviour modifiers: split and explode
 	var mitosis: EnemyModifier = run.config.modifiers.filter(func(m: EnemyModifier) -> bool: return m.title == "Mitosis")[0]
 	run.modifiers.append(mitosis)
-	var splitter: Enemy = _world.spawner.spawn(grunt, Vector2(200, 200), false)
+	var splitter: Enemy = _world.spawner.spawn(grunt, Vector2(90, 90), false)
 	await _frames(2)
 	var count := _enemies().size()
 	splitter.get_node("Hurtbox").receive(9999.0, false)

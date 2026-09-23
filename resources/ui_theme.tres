@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=25 format=3]
+[gd_resource type="Theme" load_steps=27 format=3]
 
 [ext_resource type="FontFile" path="res://assets/ui/pixel_font.fnt" id="1_font"]
 [ext_resource type="Texture2D" path="res://assets/ui/ui_skin.png" id="2_skin"]
@@ -166,6 +166,19 @@ texture_margin_top = 2.0
 texture_margin_right = 2.0
 texture_margin_bottom = 2.0
 
+[sub_resource type="StyleBoxTexture" id="bar_exp"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(41, 18, 5, 5)
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="exp_notch"]
+draw_center = false
+border_width_right = 1
+border_color = Color(0.078, 0.086, 0.098, 0.7)
+
 [sub_resource type="StyleBoxEmpty" id="empty"]
 
 [resource]
@@ -175,6 +188,13 @@ BubbleLabel/base_type = &"Label"
 BubbleLabel/colors/font_color = Color(0.235, 0.157, 0.141, 1)
 BubbleLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
 BubbleLabel/styles/normal = SubResource("bubble")
+DangerLabel/base_type = &"Label"
+DangerLabel/colors/font_color = Color(1, 0.4, 0.35, 1)
+ExpBar/base_type = &"ProgressBar"
+ExpBar/styles/background = SubResource("bar")
+ExpBar/styles/fill = SubResource("bar_exp")
+ExpNotch/base_type = &"Panel"
+ExpNotch/styles/panel = SubResource("exp_notch")
 GoldLabel/base_type = &"Label"
 GoldLabel/colors/font_color = Color(1, 0.82, 0.25, 1)
 HealthBar/base_type = &"ProgressBar"

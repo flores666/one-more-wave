@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/dev_tools.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/ui/stat_stepper.tscn" id="2"]
 
 [node name="DevTools" type="CanvasLayer"]
 layer = 100
@@ -112,9 +113,34 @@ text = "shift x10"
 
 [node name="Grid" type="GridContainer" parent="Root/Panel/Box/Character"]
 layout_mode = 2
-theme_override_constants/h_separation = 2
+theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 2
-columns = 8
+columns = 2
+
+[node name="Level" parent="Root/Panel/Box/Character/Grid" instance=ExtResource("2")]
+layout_mode = 2
+key = "level"
+label = "Lv"
+
+[node name="Str" parent="Root/Panel/Box/Character/Grid" instance=ExtResource("2")]
+layout_mode = 2
+key = "str"
+label = "STR"
+
+[node name="Agi" parent="Root/Panel/Box/Character/Grid" instance=ExtResource("2")]
+layout_mode = 2
+key = "agi"
+label = "AGI"
+
+[node name="Int" parent="Root/Panel/Box/Character/Grid" instance=ExtResource("2")]
+layout_mode = 2
+key = "int"
+label = "INT"
+
+[node name="Luk" parent="Root/Panel/Box/Character/Grid" instance=ExtResource("2")]
+layout_mode = 2
+key = "luk"
+label = "LUK"
 
 [node name="Reset" type="Button" parent="Root/Panel/Box"]
 layout_mode = 2

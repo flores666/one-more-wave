@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/quest_row.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/ui_skin.png" id="2"]
+
+[sub_resource type="AtlasTexture" id="check"]
+atlas = ExtResource("2")
+region = Rect2(20, 18, 7, 7)
+
+[node name="QuestRow" type="VBoxContainer"]
+mouse_filter = 2
+theme_override_constants/separation = 0
+script = ExtResource("1")
+
+[node name="Objective" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 3
+
+[node name="Check" type="TextureRect" parent="Objective"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("check")
+stretch_mode = 3
+
+[node name="Text" type="Label" parent="Objective"]
+layout_mode = 2
+text = "Slay 3 Grunts 0/3"
+
+[node name="Reward" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+
+[node name="Text" type="Label" parent="Reward"]
+layout_mode = 2
+theme_type_variation = &"HintLabel"
+text = "> 25 gold"

@@ -28,6 +28,11 @@ const SLAM_RADIUS := 30.0
 const SLAM_DAMAGE := 1.5
 const HIT_FLASH := 0.15
 
+@export var hit_color := Color.WHITE
+@export var crit_color := Color(1, 0.82, 0.25)
+@export var slam_warning_color := Color(1, 0.3, 0.2)
+@export var slam_color := Color(1, 0.5, 0.3)
+
 var stats: EnemyStats
 var hp := 0.0
 ## Athena for invaders; null for roaming monsters.
@@ -161,14 +166,14 @@ func _start_slam() -> void:
 	_slam_cd = SLAM_COOLDOWN
 	_slam_left = SLAM_WINDUP
 	_move(Vector2.ZERO)
-	Blast.spawn(get_parent(), global_position, SLAM_RADIUS, Color(1, 0.3, 0.2), SLAM_WINDUP, true)
+	Blast.spawn(get_parent(), global_position, SLAM_RADIUS, slam_warning_color, SLAM_WINDUP, true)
 
 
 func _tick_slam(delta: float) -> void:
 	_slam_left -= delta
 	if _slam_left >= 0.0:
 		return
-	Blast.spawn(get_parent(), global_position, SLAM_RADIUS, Color(1, 0.5, 0.3))
+	Blast.spawn(get_parent(), global_position, SLAM_RADIUS, slam_color)
 	if player and player.is_alive() and global_position.distance_to(player.global_position) < SLAM_RADIUS:
 		player.take_damage(stats.damage * SLAM_DAMAGE * _boost())
 
@@ -187,7 +192,7 @@ func _on_hit(damage: float, crit: bool) -> void:
 	_bar.max_value = stats.max_hp
 	_bar.value = hp
 	FloatingText.spawn(get_parent(), global_position + Vector2(0, -18 * stats.size),
-			("%d!" if crit else "%d") % roundi(damage), Color(1, 0.82, 0.25) if crit else Color.WHITE)
+			("%d!" if crit else "%d") % roundi(damage), crit_color if crit else hit_color)
 	create_tween().tween_property(_material, "shader_parameter/flash", 0.0, HIT_FLASH).from(1.0)
 	if hp <= 0.0:
 		_dead = true

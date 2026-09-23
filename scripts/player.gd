@@ -13,11 +13,12 @@ const RESPAWN_TIME := 5.0
 ## Out of combat for this long, health comes back at this fraction of the maximum per second.
 const REGEN_DELAY := 4.0
 const REGEN_RATE := 0.03
-const HURT_COLOR := Color(1, 0.4, 0.4)
 
 @export var player_class: PlayerClass
 ## Where teleports and respawns land.
 @export var home: Athena
+@export var hurt_color := Color(1, 0.4, 0.4)
+@export var teleport_blast_radius := 12.0
 
 var stats: CharacterStats
 var _cooldown := 0.0
@@ -53,8 +54,8 @@ func take_damage(amount: float) -> float:
 		return 0.0
 	var dealt := stats.hurt(amount)
 	_since_hurt = 0.0
-	FloatingText.spawn(get_parent(), global_position + Vector2(0, -16), "-%d" % ceili(dealt), HURT_COLOR)
-	create_tween().tween_property(_sprite, "modulate", Color.WHITE, 0.2).from(HURT_COLOR)
+	FloatingText.spawn(get_parent(), global_position + Vector2(0, -16), "-%d" % ceili(dealt), hurt_color)
+	create_tween().tween_property(_sprite, "modulate", Color.WHITE, 0.2).from(hurt_color)
 	if is_teleporting():
 		_cancel_teleport()
 		teleport_interrupted.emit()
@@ -124,9 +125,9 @@ func _channel(delta: float) -> void:
 	_cast_bar.value = _teleport / TELEPORT_TIME
 	if _teleport >= TELEPORT_TIME:
 		_cancel_teleport()
-		Blast.spawn(get_parent(), global_position, 12, Athena.COLOR)
+		Blast.spawn(get_parent(), global_position, teleport_blast_radius, home.color)
 		_arrive_home()
-		Blast.spawn(get_parent(), global_position, 12, Athena.COLOR)
+		Blast.spawn(get_parent(), global_position, teleport_blast_radius, home.color)
 
 
 func _cancel_teleport() -> void:

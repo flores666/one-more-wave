@@ -1,6 +1,9 @@
 ## A flat ring on the ground: grows over `time` for telegraphs, or flashes for explosions.
+## Drawn rather than a sprite because every use has its own radius.
 class_name Blast
 extends Node2D
+
+const SCENE_PATH := "res://scenes/blast.tscn"
 
 var radius := 16.0
 var color := Color.WHITE
@@ -10,13 +13,12 @@ var _t := 0.0
 
 
 static func spawn(parent: Node, at: Vector2, radius: float, color: Color, time := 0.3, grow := false) -> Blast:
-	var blast := Blast.new()
+	var blast: Blast = load(SCENE_PATH).instantiate()
 	blast.position = at
 	blast.radius = radius
 	blast.color = color
 	blast.time = time
 	blast.grow = grow
-	blast.z_index = -1
 	parent.add_child(blast)
 	return blast
 

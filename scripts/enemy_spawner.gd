@@ -15,6 +15,7 @@ const EXPLODE_DAMAGE := 1.5
 @export var entities: Node2D
 @export var player: Player
 @export var athena: Athena
+@export var explode_color := Color(1, 0.55, 0.2)
 
 var run: Run
 
@@ -44,7 +45,7 @@ func _on_died(enemy: Enemy) -> void:
 
 
 func _explode(at: Vector2, damage: float) -> void:
-	Blast.spawn(entities, at, EXPLODE_RADIUS, Color(1, 0.55, 0.2))
+	Blast.spawn(entities, at, EXPLODE_RADIUS, explode_color)
 	if player.is_alive() and player.global_position.distance_to(at) < EXPLODE_RADIUS:
 		player.take_damage(damage)
 	if athena.global_position.distance_to(at) < EXPLODE_RADIUS:

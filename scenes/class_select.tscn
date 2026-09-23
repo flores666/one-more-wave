@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/class_select.gd" id="1"]
 [ext_resource type="Resource" path="res://resources/warrior.tres" id="2"]
 [ext_resource type="Resource" path="res://resources/archer.tres" id="3"]
 [ext_resource type="Resource" path="res://resources/mage.tres" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/world.tscn" id="5"]
+[ext_resource type="Script" path="res://scripts/class_button.gd" id="6"]
 
 [node name="ClassSelect" type="CanvasLayer"]
 script = ExtResource("1")
-classes = Array[Resource]([ExtResource("2"), ExtResource("3"), ExtResource("4")])
+world_scene = ExtResource("5")
 
 [node name="Root" type="Control" parent="."]
 layout_mode = 3
@@ -38,9 +40,35 @@ theme_type_variation = &"TitleLabel"
 text = "CHOOSE YOUR CLASS"
 horizontal_alignment = 1
 
+[node name="Classes" type="VBoxContainer" parent="Root/Center/Panel/Box"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Warrior" type="Button" parent="Root/Center/Panel/Box/Classes"]
+layout_mode = 2
+text = "Warrior"
+script = ExtResource("6")
+player_class = ExtResource("2")
+
+[node name="Archer" type="Button" parent="Root/Center/Panel/Box/Classes"]
+layout_mode = 2
+text = "Archer"
+script = ExtResource("6")
+player_class = ExtResource("3")
+
+[node name="Mage" type="Button" parent="Root/Center/Panel/Box/Classes"]
+layout_mode = 2
+text = "Mage"
+script = ExtResource("6")
+player_class = ExtResource("4")
+
 [node name="Description" type="Label" parent="Root/Center/Panel/Box"]
 custom_minimum_size = Vector2(124, 9)
 layout_mode = 2
 theme_type_variation = &"HintLabel"
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[connection signal="mouse_entered" from="Root/Center/Panel/Box/Classes/Warrior" to="Root/Center/Panel/Box/Classes/Warrior" method="grab_focus"]
+[connection signal="mouse_entered" from="Root/Center/Panel/Box/Classes/Archer" to="Root/Center/Panel/Box/Classes/Archer" method="grab_focus"]
+[connection signal="mouse_entered" from="Root/Center/Panel/Box/Classes/Mage" to="Root/Center/Panel/Box/Classes/Mage" method="grab_focus"]

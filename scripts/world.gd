@@ -3,10 +3,10 @@
 ## and Loot; this script routes events between them and the scene (drops, rewards, banners).
 extends Node2D
 
-const GOLD_COLOR := Color(1, 0.82, 0.25)
-const DANGER_COLOR := Color(1, 0.4, 0.35)
-
 @export var config: RunConfig
+@export var loot_drop_scene: PackedScene
+@export var gold_color := Color(1, 0.82, 0.25)
+@export var danger_color := Color(1, 0.4, 0.35)
 @export var entities: Node2D
 @export var player: Player
 @export var athena: Athena
@@ -39,9 +39,9 @@ func _ready() -> void:
 	spawner.died.connect(_on_enemy_died)
 	quests.completed.connect(_on_quest_completed)
 	player.died.connect(func() -> void:
-		hud.banner("You fell! Back at Athena in %ds" % Player.RESPAWN_TIME, DANGER_COLOR))
+		hud.banner("You fell! Back at Athena in %ds" % Player.RESPAWN_TIME, danger_color))
 	player.teleport_interrupted.connect(func() -> void:
-		FloatingText.spawn(entities, player.global_position + Vector2(0, -24), "Interrupted!", DANGER_COLOR))
+		FloatingText.spawn(entities, player.global_position + Vector2(0, -24), "Interrupted!", danger_color))
 	_on_phase_changed(run.phase)
 
 
@@ -64,13 +64,13 @@ func _on_phase_changed(phase: Run.Phase) -> void:
 				boss = boss or zone.has_boss()
 			quests.boss_available = boss
 			quests.refill(run.wave, run.rng)
-			hud.banner("Wave %d arrives in %ds. Go farm!" % [run.wave, ceili(run.time_left)], GOLD_COLOR)
+			hud.banner("Wave %d arrives in %ds. Go farm!" % [run.wave, ceili(run.time_left)], gold_color)
 		Run.Phase.INVASION:
 			invasion.start()
-			hud.banner("INVASION! Defend Athena!", DANGER_COLOR)
+			hud.banner("INVASION! Defend Athena!", danger_color)
 		Run.Phase.WAVE_COMPLETED:
 			player.heal_full()
-			hud.banner("Wave cleared!", GOLD_COLOR)
+			hud.banner("Wave cleared!", gold_color)
 
 
 func _on_enemy_died(enemy: Enemy) -> void:
@@ -85,7 +85,7 @@ func _on_enemy_died(enemy: Enemy) -> void:
 
 
 func _drop(at: Vector2, item: Item, gold: int) -> void:
-	var drop := LootDrop.new()
+	var drop: LootDrop = loot_drop_scene.instantiate()
 	drop.item = item
 	drop.gold = gold
 	drop.position = at
@@ -101,16 +101,16 @@ func _on_loot_touched(drop: LootDrop) -> void:
 		else:
 			var value := Loot.salvage_value(drop.item)
 			run.add_gold(value)
-			FloatingText.spawn(entities, above, "Bag full: salvaged +%dg" % value, GOLD_COLOR)
+			FloatingText.spawn(entities, above, "Bag full: salvaged +%dg" % value, gold_color)
 	else:
 		run.add_gold(drop.gold)
 		quests.report_collect(drop.gold, run.wave, run.rng)
-		FloatingText.spawn(entities, above, "+%dg" % drop.gold, GOLD_COLOR)
+		FloatingText.spawn(entities, above, "+%dg" % drop.gold, gold_color)
 	drop.queue_free()
 
 
 func _on_quest_completed(quest: Quest) -> void:
-	hud.banner("Quest complete! %s" % quest.reward_text(), GOLD_COLOR)
+	hud.banner("Quest complete! %s" % quest.reward_text(), gold_color)
 	var quality := Loot.quality_for(run)
 	match quest.reward:
 		Quest.Reward.ITEM:

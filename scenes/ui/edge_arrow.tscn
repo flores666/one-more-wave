@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[node name="EdgeArrow" type="Node2D"]
+
+[node name="Tip" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, -8, 3.5, -8, -3.5)

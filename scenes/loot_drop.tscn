@@ -1,0 +1,111 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/loot_drop.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/ui_skin.png" id="2"]
+
+[sub_resource type="CircleShape2D" id="pickup"]
+radius = 7.0
+
+[sub_resource type="AtlasTexture" id="coin"]
+atlas = ExtResource("2")
+region = Rect2(34, 18, 7, 9)
+
+[sub_resource type="Animation" id="RESET"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gem:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gem/Beam:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.35)]
+}
+
+[sub_resource type="Animation" id="bob"]
+length = 2.094
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gem:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.175, 0.873, 1.222, 1.92),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, -4), Vector2(0, -3), Vector2(0, -4), Vector2(0, -5), Vector2(0, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gem/Beam:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26, 0.785, 1.047, 1.31, 1.83, 2.094),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.35), Color(1, 1, 1, 0.5), Color(1, 1, 1, 0.2), Color(1, 1, 1, 0.35), Color(1, 1, 1, 0.5), Color(1, 1, 1, 0.2), Color(1, 1, 1, 0.35)]
+}
+
+[sub_resource type="AnimationLibrary" id="library"]
+_data = {
+&"RESET": SubResource("RESET"),
+&"bob": SubResource("bob")
+}
+
+[node name="LootDrop" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+script = ExtResource("1")
+
+[node name="Pickup" type="CollisionShape2D" parent="."]
+shape = SubResource("pickup")
+
+[node name="Coin" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = SubResource("coin")
+offset = Vector2(0, -4)
+
+[node name="Gem" type="Node2D" parent="."]
+position = Vector2(0, -4)
+
+[node name="Beam" type="Line2D" parent="Gem"]
+self_modulate = Color(1, 1, 1, 0.35)
+points = PackedVector2Array(0, -24, 0, 0)
+width = 1.0
+
+[node name="Body" type="Polygon2D" parent="Gem"]
+polygon = PackedVector2Array(0, -3, 3, 0, 0, 3, -3, 0)
+
+[node name="Outline" type="Line2D" parent="Gem"]
+points = PackedVector2Array(0, -3, 3, 0, 0, 3, -3, 0)
+closed = true
+width = 1.0
+default_color = Color(0.4, 0.4, 0.4, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("library")
+}
+autoplay = &"bob"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
