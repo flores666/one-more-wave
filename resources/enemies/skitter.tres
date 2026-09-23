@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/rules/enemy_type.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"skitter"
+display_name = "Skitter"
+tier = 0
+max_hp = 16.0
+damage = 2.0
+speed = 52.0
+attack_range = 9.0
+attack_cooldown = 0.7
+experience = 6
+gold = 1
+items = 0.05
+loot_quality = 0.0
+abilities = Array[StringName]([])
+body_color = Color(0.85, 0.62, 0.2, 1)
+eye_color = Color(0.3, 0.12, 0.06, 1)
+size = 1.0

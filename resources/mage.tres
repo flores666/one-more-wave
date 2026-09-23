@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PlayerClass" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/player_class.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/attacks/fireball.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/ui_skin.png" id="3"]
+
+[sub_resource type="AtlasTexture" id="icon"]
+atlas = ExtResource("3")
+region = Rect2(42, 27, 12, 12)
+
+[resource]
+script = ExtResource("1")
+display_name = "Mage"
+description = "Casts slow fireballs that hit hard."
+attack_scene = ExtResource("2")
+icon = SubResource("icon")
+cooldown = 0.82
+base_damage = 14.0
+main_stat = "int"
+base_stats = Dictionary[String, int]({"str": 2, "agi": 3, "int": 10, "luk": 3})
+stats_per_level = Dictionary[String, int]({"str": 0, "agi": 1, "int": 3, "luk": 1})

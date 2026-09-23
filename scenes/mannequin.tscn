@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/mannequin.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/mannequin.png" id="2"]
+[ext_resource type="Shader" path="res://shaders/hit_flash.gdshader" id="3"]
+[ext_resource type="Script" path="res://scripts/hurtbox.gd" id="4"]
+
+[sub_resource type="ShaderMaterial" id="hit_material"]
+resource_local_to_scene = true
+shader = ExtResource("3")
+shader_parameter/flash = 0.0
+shader_parameter/shake = 0.0
+shader_parameter/shake_speed = 70.0
+
+[sub_resource type="RectangleShape2D" id="base"]
+size = Vector2(16, 6)
+
+[sub_resource type="RectangleShape2D" id="body"]
+size = Vector2(16, 22)
+
+[node name="Mannequin" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("hit_material")
+texture = ExtResource("2")
+centered = false
+offset = Vector2(-10, -22)
+
+[node name="BaseCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("base")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("4")
+exp_per_hit = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -11)
+shape = SubResource("body")
+
+[node name="DpsLabel" type="Label" parent="."]
+grow_horizontal = 2
+grow_vertical = 0
+offset_left = -30.0
+offset_top = -34.0
+offset_right = 30.0
+offset_bottom = -24.0
+text = "DPS 0.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CritLabel" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+grow_horizontal = 2
+grow_vertical = 0
+offset_left = -30.0
+offset_top = -44.0
+offset_right = 30.0
+offset_bottom = -34.0
+theme_override_colors/font_color = Color(1, 0.82, 0.25, 1)
+text = "CRIT"
+horizontal_alignment = 1
+vertical_alignment = 1

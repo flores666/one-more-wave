@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/rules/enemy_type.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"champion"
+display_name = "Champion"
+tier = 1
+max_hp = 200.0
+damage = 8.0
+speed = 30.0
+attack_range = 12.0
+attack_cooldown = 1.1
+experience = 60
+gold = 6
+items = 1.0
+loot_quality = 1.0
+abilities = Array[StringName]([])
+body_color = Color(0.92, 0.45, 0.15, 1)
+eye_color = Color(1, 1, 0.7, 1)
+size = 1.5

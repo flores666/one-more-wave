@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/rules/enemy_type.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"warlord"
+display_name = "Warlord"
+tier = 2
+max_hp = 1000.0
+damage = 14.0
+speed = 24.0
+attack_range = 14.0
+attack_cooldown = 1.5
+experience = 300
+gold = 30
+items = 3.0
+loot_quality = 3.0
+abilities = Array[StringName]([&"slam"])
+body_color = Color(0.35, 0.08, 0.14, 1)
+eye_color = Color(1, 0.3, 0.2, 1)
+size = 2.0

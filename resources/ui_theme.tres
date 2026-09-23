@@ -1,0 +1,226 @@
+[gd_resource type="Theme" load_steps=25 format=3]
+
+[ext_resource type="FontFile" path="res://assets/ui/pixel_font.fnt" id="1_font"]
+[ext_resource type="Texture2D" path="res://assets/ui/ui_skin.png" id="2_skin"]
+
+[sub_resource type="StyleBoxTexture" id="panel"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(0, 0, 9, 9)
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+content_margin_left = 5.0
+content_margin_top = 4.0
+content_margin_right = 5.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="hud"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(0, 0, 9, 9)
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="button"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(9, 0, 9, 9)
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 4.0
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="button_hover"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(18, 0, 9, 9)
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 4.0
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="button_pressed"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(27, 0, 9, 9)
+texture_margin_left = 3.0
+texture_margin_top = 4.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+content_margin_left = 6.0
+content_margin_top = 3.0
+content_margin_right = 6.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="focus"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(36, 0, 9, 9)
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+draw_center = false
+
+[sub_resource type="StyleBoxTexture" id="bubble"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(45, 0, 9, 9)
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="slider"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(0, 9, 5, 3)
+texture_margin_left = 2.0
+texture_margin_top = 1.0
+texture_margin_right = 2.0
+texture_margin_bottom = 1.0
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="slider_fill"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(5, 9, 5, 3)
+texture_margin_left = 2.0
+texture_margin_top = 1.0
+texture_margin_right = 2.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="AtlasTexture" id="grabber"]
+atlas = ExtResource("2_skin")
+region = Rect2(10, 9, 5, 7)
+
+[sub_resource type="AtlasTexture" id="grabber_hover"]
+atlas = ExtResource("2_skin")
+region = Rect2(15, 9, 5, 7)
+
+[sub_resource type="StyleBoxTexture" id="slot"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(0, 27, 9, 9)
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="slot_selected"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(9, 27, 9, 9)
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="bar"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(0, 18, 5, 5)
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="bar_health"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(5, 18, 5, 5)
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="bar_mana"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(10, 18, 5, 5)
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="bar_stamina"]
+texture = ExtResource("2_skin")
+region_rect = Rect2(15, 18, 5, 5)
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="empty"]
+
+[resource]
+default_font = ExtResource("1_font")
+default_font_size = 8
+BubbleLabel/base_type = &"Label"
+BubbleLabel/colors/font_color = Color(0.235, 0.157, 0.141, 1)
+BubbleLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
+BubbleLabel/styles/normal = SubResource("bubble")
+GoldLabel/base_type = &"Label"
+GoldLabel/colors/font_color = Color(1, 0.82, 0.25, 1)
+HealthBar/base_type = &"ProgressBar"
+HealthBar/styles/background = SubResource("bar")
+HealthBar/styles/fill = SubResource("bar_health")
+ManaBar/base_type = &"ProgressBar"
+ManaBar/styles/background = SubResource("bar")
+ManaBar/styles/fill = SubResource("bar_mana")
+Slot/base_type = &"PanelContainer"
+Slot/styles/panel = SubResource("slot")
+SlotSelected/base_type = &"PanelContainer"
+SlotSelected/styles/panel = SubResource("slot_selected")
+StaminaBar/base_type = &"ProgressBar"
+StaminaBar/styles/background = SubResource("bar")
+StaminaBar/styles/fill = SubResource("bar_stamina")
+Button/colors/font_color = Color(0.9, 0.88, 0.84, 1)
+Button/colors/font_focus_color = Color(0.9, 0.88, 0.84, 1)
+Button/colors/font_hover_color = Color(0.706, 0.902, 0.941, 1)
+Button/colors/font_pressed_color = Color(0.706, 0.902, 0.941, 1)
+Button/colors/font_hover_pressed_color = Color(0.706, 0.902, 0.941, 1)
+Button/styles/disabled = SubResource("button")
+Button/styles/focus = SubResource("focus")
+Button/styles/hover = SubResource("button_hover")
+Button/styles/hover_pressed = SubResource("button_pressed")
+Button/styles/normal = SubResource("button")
+Button/styles/pressed = SubResource("button_pressed")
+HSlider/icons/grabber = SubResource("grabber")
+HSlider/icons/grabber_disabled = SubResource("grabber")
+HSlider/icons/grabber_highlight = SubResource("grabber_hover")
+HSlider/styles/grabber_area = SubResource("slider_fill")
+HSlider/styles/grabber_area_highlight = SubResource("slider_fill")
+HSlider/styles/slider = SubResource("slider")
+HintLabel/base_type = &"Label"
+HintLabel/colors/font_color = Color(0.55, 0.565, 0.61, 1)
+HudLabel/base_type = &"Label"
+HudLabel/colors/font_color = Color(1, 0.82, 0.25, 1)
+HudLabel/styles/normal = SubResource("hud")
+Label/colors/font_color = Color(0.9, 0.88, 0.84, 1)
+Label/colors/font_shadow_color = Color(0.078, 0.086, 0.098, 0.85)
+Label/constants/line_spacing = 1
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 0
+Label/styles/normal = SubResource("empty")
+PanelContainer/styles/panel = SubResource("panel")
+ProgressBar/styles/background = SubResource("slider")
+ProgressBar/styles/fill = SubResource("slider_fill")
+TitleLabel/base_type = &"Label"
+TitleLabel/colors/font_color = Color(0.482, 0.765, 0.824, 1)

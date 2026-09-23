@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/class_select.gd" id="1"]
+[ext_resource type="Resource" path="res://resources/warrior.tres" id="2"]
+[ext_resource type="Resource" path="res://resources/archer.tres" id="3"]
+[ext_resource type="Resource" path="res://resources/mage.tres" id="4"]
+
+[node name="ClassSelect" type="CanvasLayer"]
+script = ExtResource("1")
+classes = Array[Resource]([ExtResource("2"), ExtResource("3"), ExtResource("4")])
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+
+[node name="Center" type="CenterContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Root/Center"]
+layout_mode = 2
+
+[node name="Box" type="VBoxContainer" parent="Root/Center/Panel"]
+custom_minimum_size = Vector2(124, 0)
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Title" type="Label" parent="Root/Center/Panel/Box"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "CHOOSE YOUR CLASS"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="Root/Center/Panel/Box"]
+custom_minimum_size = Vector2(124, 9)
+layout_mode = 2
+theme_type_variation = &"HintLabel"
+horizontal_alignment = 1
+autowrap_mode = 3

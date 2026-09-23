@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PlayerClass" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/player_class.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/attacks/slash.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ui/ui_skin.png" id="3"]
+
+[sub_resource type="AtlasTexture" id="icon"]
+atlas = ExtResource("3")
+region = Rect2(18, 27, 12, 12)
+
+[resource]
+script = ExtResource("1")
+display_name = "Warrior"
+description = "Slashes everything close in front."
+attack_scene = ExtResource("2")
+icon = SubResource("icon")
+cooldown = 0.47
+base_damage = 11.0
+main_stat = "str"
+base_stats = Dictionary[String, int]({"str": 10, "agi": 4, "int": 1, "luk": 3})
+stats_per_level = Dictionary[String, int]({"str": 3, "agi": 1, "int": 0, "luk": 1})

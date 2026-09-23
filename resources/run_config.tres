@@ -1,0 +1,176 @@
+[gd_resource type="Resource" script_class="RunConfig" load_steps=30 format=3]
+
+[ext_resource type="Script" path="res://scripts/rules/run_config.gd" id="s_config"]
+[ext_resource type="Script" path="res://scripts/rules/wave_table.gd" id="s_table"]
+[ext_resource type="Script" path="res://scripts/rules/wave_rule.gd" id="s_rule"]
+[ext_resource type="Script" path="res://scripts/rules/enemy_modifier.gd" id="s_mod"]
+[ext_resource type="Resource" path="res://resources/enemies/grunt.tres" id="e_grunt"]
+[ext_resource type="Resource" path="res://resources/enemies/skitter.tres" id="e_skitter"]
+[ext_resource type="Resource" path="res://resources/enemies/brute.tres" id="e_brute"]
+[ext_resource type="Resource" path="res://resources/enemies/champion.tres" id="e_champion"]
+[ext_resource type="Resource" path="res://resources/enemies/warlord.tres" id="e_warlord"]
+
+[sub_resource type="Resource" id="rule_0"]
+script = ExtResource("s_rule")
+enemy = ExtResource("e_grunt")
+first_wave = 1
+every = 1
+count = 5.0
+count_per_wave = 0.7
+
+[sub_resource type="Resource" id="rule_1"]
+script = ExtResource("s_rule")
+enemy = ExtResource("e_skitter")
+first_wave = 2
+every = 1
+count = 2.0
+count_per_wave = 0.4
+
+[sub_resource type="Resource" id="rule_2"]
+script = ExtResource("s_rule")
+enemy = ExtResource("e_brute")
+first_wave = 3
+every = 1
+count = 1.0
+count_per_wave = 0.3
+
+[sub_resource type="Resource" id="rule_3"]
+script = ExtResource("s_rule")
+enemy = ExtResource("e_champion")
+first_wave = 5
+every = 5
+count = 1.0
+count_per_wave = 0.2
+
+[sub_resource type="Resource" id="rule_4"]
+script = ExtResource("s_rule")
+enemy = ExtResource("e_champion")
+first_wave = 11
+every = 1
+count = 1.0
+count_per_wave = 0.08
+
+[sub_resource type="Resource" id="rule_5"]
+script = ExtResource("s_rule")
+enemy = ExtResource("e_warlord")
+first_wave = 10
+every = 10
+count = 1.0
+count_per_wave = 0.1
+
+[sub_resource type="Resource" id="rule_6"]
+script = ExtResource("s_rule")
+enemy = ExtResource("e_warlord")
+first_wave = 25
+every = 5
+count = 1.0
+count_per_wave = 0.04
+
+[sub_resource type="Resource" id="waves"]
+script = ExtResource("s_table")
+rules = Array[Resource]([SubResource("rule_0"), SubResource("rule_1"), SubResource("rule_2"), SubResource("rule_3"), SubResource("rule_4"), SubResource("rule_5"), SubResource("rule_6")])
+hp_growth = 0.15
+damage_growth = 0.08
+extra_elite = ExtResource("e_champion")
+
+[sub_resource type="Resource" id="mod_vigor"]
+script = ExtResource("s_mod")
+title = "Vigor"
+description = "Enemies have +20% maximum health."
+loot_bonus = 0.1
+hp = 0.2
+
+[sub_resource type="Resource" id="mod_haste"]
+script = ExtResource("s_mod")
+title = "Haste"
+description = "Enemies move 15% faster."
+loot_bonus = 0.1
+speed = 0.15
+
+[sub_resource type="Resource" id="mod_brutality"]
+script = ExtResource("s_mod")
+title = "Brutality"
+description = "Enemies deal +20% damage."
+loot_bonus = 0.1
+damage = 0.2
+
+[sub_resource type="Resource" id="mod_vampirism"]
+script = ExtResource("s_mod")
+title = "Vampirism"
+description = "Enemies heal for 10% of the damage they deal."
+loot_bonus = 0.08
+lifesteal = 0.1
+
+[sub_resource type="Resource" id="mod_volatile"]
+script = ExtResource("s_mod")
+title = "Volatile"
+description = "Enemies explode on death, hurting you and Athena nearby."
+loot_bonus = 0.15
+max_stacks = 1
+ability = &"explode"
+
+[sub_resource type="Resource" id="mod_drill"]
+script = ExtResource("s_mod")
+title = "Charge Drill"
+description = "Elites learn a charging dash."
+loot_bonus = 0.12
+max_stacks = 1
+target = 2
+ability = &"dash"
+
+[sub_resource type="Resource" id="mod_tyranny"]
+script = ExtResource("s_mod")
+title = "Tyranny"
+description = "Bosses have +30% maximum health."
+loot_bonus = 0.08
+target = 3
+hp = 0.3
+
+[sub_resource type="Resource" id="mod_champions"]
+script = ExtResource("s_mod")
+title = "Champions"
+description = "Every invasion brings one more elite."
+loot_bonus = 0.15
+extra_elites = 1
+
+[sub_resource type="Resource" id="mod_mitosis"]
+script = ExtResource("s_mod")
+title = "Mitosis"
+description = "Normal enemies split in two when they die."
+loot_bonus = 0.15
+max_stacks = 1
+target = 1
+ability = &"split"
+
+[sub_resource type="Resource" id="mod_frenzy"]
+script = ExtResource("s_mod")
+title = "Frenzy"
+description = "Enemies under 40% health get 50% faster and deadlier."
+loot_bonus = 0.12
+max_stacks = 1
+ability = &"enrage"
+
+[sub_resource type="Resource" id="mod_siege"]
+script = ExtResource("s_mod")
+title = "Siegecraft"
+description = "Enemies deal +50% damage to Athena."
+loot_bonus = 0.1
+siege = 0.5
+
+[sub_resource type="Resource" id="mod_regen"]
+script = ExtResource("s_mod")
+title = "Regeneration"
+description = "Enemies regenerate 2% of their health per second."
+loot_bonus = 0.1
+regen = 0.02
+
+[resource]
+script = ExtResource("s_config")
+first_farming_duration = 60.0
+farming_duration = 90.0
+wave_cleared_delay = 2.5
+base_max_hp = 200.0
+base_heal_per_wave = 0.25
+choice_count = 3
+waves = SubResource("waves")
+modifiers = Array[Resource]([SubResource("mod_vigor"), SubResource("mod_haste"), SubResource("mod_brutality"), SubResource("mod_vampirism"), SubResource("mod_volatile"), SubResource("mod_drill"), SubResource("mod_tyranny"), SubResource("mod_champions"), SubResource("mod_mitosis"), SubResource("mod_frenzy"), SubResource("mod_siege"), SubResource("mod_regen")])
